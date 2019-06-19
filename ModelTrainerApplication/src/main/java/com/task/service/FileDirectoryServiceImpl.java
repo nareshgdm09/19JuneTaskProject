@@ -42,7 +42,6 @@ public class FileDirectoryServiceImpl implements FileDirectoryService {
 	public void moveCompletedFiles(List<Player> playerRecords) throws FileMoveException {
 		logger.debug("inside moveCompletedFiles(List<Player> playerRecords) method");
 		for (Player player : playerRecords) {
-			System.out.println("Moving file :" + player);
 			try {
 
 				Path jsonSourcePath = Paths.get(Constants.JSONPATH + player.getId() + Constants.JSONEXT);
