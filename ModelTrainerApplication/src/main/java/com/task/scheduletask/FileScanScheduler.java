@@ -31,7 +31,7 @@ public class FileScanScheduler {
 
 	@SuppressWarnings("unchecked")
 	@Scheduled(initialDelay = 1000, fixedRate = 8000)
-	public void DirectoryScanScheduledMethod() throws ExcelFileCreationException {
+	public void DirectoryScanScheduledMethod() throws Exception {
 		logger.debug("inside modelTrainerscheduledMethod()");
 
 		List<String> jsonFiles = fileDirectoryService.getTypeFiles(Constants.JSONPATH, Constants.JSONEXT);
