@@ -12,14 +12,14 @@ import com.task.common.CommonUtil;
 import com.task.entity.Player;
 import com.task.exception.ErrorFileException;
 import com.task.exception.PlayerDataAccessException;
-import com.task.repository.PlayerRepositoryImpl;
+import com.task.repository.PlayerRepository;
 
 @Component
 public class PlayerDBServiceImpl implements PlayerDBService {
 	private static final Logger logger = LoggerFactory.getLogger(PlayerDBServiceImpl.class);
 
 	@Autowired
-	private PlayerRepositoryImpl playerRepoTestImpl;
+	private PlayerRepository playerRepository;
 	@Autowired
 	FileDirectoryService fileDirectoryService;
 	@Autowired
@@ -41,7 +41,7 @@ public class PlayerDBServiceImpl implements PlayerDBService {
 		});
 
 		try {
-			playerRepoTestImpl.saveAll(players);
+			playerRepository.saveAll(players);
 		} catch (PlayerDataAccessException e) {
 			logger.error("Error while saving players :", e);
 		}
@@ -55,7 +55,7 @@ public class PlayerDBServiceImpl implements PlayerDBService {
 
 	@Override
 	public List<Player> FindAllPlayers() {
-		return (List<Player>) playerRepoTestImpl.findAll();
+		return (List<Player>) playerRepository.findAll();
 	}
 
 }

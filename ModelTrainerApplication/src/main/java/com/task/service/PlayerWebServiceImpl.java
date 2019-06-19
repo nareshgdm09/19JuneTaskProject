@@ -8,17 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.task.entity.Player;
-import com.task.repository.PlayerRepositoryImpl;
+import com.task.repository.PlayerRepository;
 
 @Service
 public class PlayerWebServiceImpl implements PlayerWebService {
 	private static final Logger logger = LoggerFactory.getLogger(PlayerWebServiceImpl.class);
 	@Autowired
-	private PlayerRepositoryImpl playerRepoTestImpl;
+	private PlayerRepository playerRepository;
 
 	public List<Player> findPlayer(Player player) {
 		logger.debug("inside findPlayer(Player player) method :");
-		List<Player> players = (List<Player>) playerRepoTestImpl.findCustomPayer(player);
+		List<Player> players = (List<Player>) playerRepository.findCustomPayer(player);
 		return players;
 	}
 

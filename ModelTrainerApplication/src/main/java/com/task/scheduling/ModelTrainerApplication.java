@@ -26,6 +26,7 @@ public class ModelTrainerApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		System.out.println("inside run method");
 		fileScanScheduler.DirectoryScanScheduledMethod();
 	}
 

@@ -32,12 +32,13 @@ public class FileScanScheduler {
 	@SuppressWarnings("unchecked")
 	@Scheduled(initialDelay = 1000, fixedRate = 8000)
 	public void DirectoryScanScheduledMethod() throws Exception {
+		System.out.println("inside modelTrainerscheduledMethod()");
 		logger.debug("inside modelTrainerscheduledMethod()");
 
 		List<String> jsonFiles = fileDirectoryService.getTypeFiles(Constants.JSONPATH, Constants.JSONEXT);
 		List<String> xmlFiles = fileDirectoryService.getTypeFiles(Constants.XMLPATH, Constants.XMLEXT);
 
-		if (jsonFiles.isEmpty() && xmlFiles.isEmpty()) {
+		if (!jsonFiles.isEmpty() && !xmlFiles.isEmpty()) {
 			CommonUtil.findCommonFiles(jsonFiles, xmlFiles);
 
 			List<Object> validAndErrorRecords = PlayerDBService.savePlayers(jsonFiles, xmlFiles);
@@ -46,9 +47,9 @@ public class FileScanScheduler {
 			List<String> ErrorRecords = (List<String>) validAndErrorRecords.get(1);
 
 			try {
-				if (validRecords.isEmpty())
+				if (!validRecords.isEmpty())
 					fileDirectoryService.moveCompletedFiles(validRecords);
-				if (ErrorRecords.isEmpty())
+				if (!ErrorRecords.isEmpty())
 					fileDirectoryService.moveErrorFiles(ErrorRecords);
 			} catch (FileMoveException e) {
 				logger.error("Error while moving File");
